@@ -166,31 +166,42 @@ if (startButton) {
 
 function loadAudio() {
     if (audioBuffer) {
-        // Audio is already loaded, play it
         playAudio();
         return;
     }
 
-    // Show loading indicator
     loadingIndicator.style.display = 'block';
     startButton.disabled = true;
 
-    // Fetch and decode the audio data
     fetch('audio/version5.m4a')
-        .then(response => response.arrayBuffer())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.arrayBuffer();
+        })
         .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
         .then(decodedData => {
             audioBuffer = decodedData;
-            loadingIndicator.style.display = 'none'; // Hide loading indicator
+            loadingIndicator.style.display = 'none';
             startButton.disabled = false;
-            playAudio(); // Play audio once loaded
+            playAudio();
         })
         .catch(error => {
             console.error('Error loading audio:', error);
+            alert('Fehler beim Laden der Audio-Datei: ' + error.message);
+            loadingIndicator.style.display = 'none';
+            startButton.disabled = false;
         });
 }
 
 function playAudio() {
+    if (!audioContext) {
+        console.error('AudioContext nicht verfügbar');
+        alert('Ihr Browser unterstützt die Audio-Funktionalität nicht');
+        return;
+    }
+
     audioContext.resume().then(() => {
         // Create a new buffer source
         audioSource = audioContext.createBufferSource();
@@ -217,6 +228,9 @@ function playAudio() {
             startButton.textContent = 'Start';
             isPlaying = false;
         };
+    }).catch(error => {
+        console.error('Fehler beim Starten des AudioContext:', error);
+        alert('Fehler beim Starten der Audio-Wiedergabe');
     });
 }
 
