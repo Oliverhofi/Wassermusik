@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Existing head content -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wassermusik</title>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Include the Unmute Library -->
+    <script src="scripts/unmute.js"></script> <!-- Ensure this path is correct based on your project structure -->
+    <script defer src="https://umami.hofmann-media.com/script.js" data-website-id="9cdf6bd2-0667-467d-aa6e-c9dcfd32bd73"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <h1>Neige dein Handy nach vorne oder hinten</h1>
+    <div id="image-container">
+        <img id="image1" class="image" src="images/wasservioline.webp" alt="Wasservioline">
+        <img id="image2" class="image" src="images/violine.webp" alt="Violine">
+    </div>
+    <!-- Debug Elements -->
+    <div id="output-orientation">Orientation: 0°</div>
+    <div id="rotation-bar">
+        <div id="indicator"></div>
+    </div>
+    <!-- Controls -->
+    <div>
+        <button id="startButton">Start</button>
+    </div>
+    <!-- Slider for desktop devices -->
+    <div id="slider-container">
+        <label for="mixerSlider">Mixer</label>
+        <input type="range" id="mixerSlider" min="0" max="100" value="50">
+    </div>
+    <!-- Loading Indicator -->
+    <div id="loading-indicator"></div>
+    <!-- Offline Indicator -->
+    <div id="offline-indicator">offline mode</div>
+    <!-- Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <div id="time-display">0:00 / 0:00</div>
+    <!-- Removed Audio Player -->
+    <script src="/scripts/nosleep.min.js"></script><!-- Ensure this path is correct based on your project structure -->
+    <script src="/scripts/main.js"></script>
+</body>
+</html>
